@@ -7,13 +7,13 @@ import 'screens/bt_connect_screen.dart';
 import 'screens/mode_selector_screen.dart';
 import 'screens/options_screen.dart';
 import 'screens/modifiers_screen.dart';
-import 'screens/options_screen.dart';
 import 'screens/custom_drawing_screen.dart';
-import 'screens/color_picker_screen.dart';
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
         ],
         child: Consumer<Bluetooth>(
           builder: (ctx, bluetooth, _) => MaterialApp(
-            title: 'Flutter Demo',
+            title: "Screen Controller",
             theme: ThemeData(
               primarySwatch: Colors.blue,
               brightness: Brightness.light,
@@ -40,11 +40,13 @@ class MyApp extends StatelessWidget {
             ),
             themeMode: ThemeMode.dark,
             debugShowCheckedModeBanner: false,
-            home: bluetooth.isConnected ? OptionsScreen() : BTConnectScreen(),
+            home: bluetooth.isConnected
+                ? OptionsScreen()
+                : const BTConnectScreen(),
             routes: {
               OptionsScreen.routeName: (ctx) => OptionsScreen(),
-              ModeSelectorScreen.routeName: (ctx) => ModeSelectorScreen(),
-              ModifiersScreen.routeName: (ctx) => ModifiersScreen(),
+              ModeSelectorScreen.routeName: (ctx) => const ModeSelectorScreen(),
+              ModifiersScreen.routeName: (ctx) => const ModifiersScreen(),
               CustomDrawingScreen.routeName: (ctx) => CustomDrawingScreen(),
             },
           ),

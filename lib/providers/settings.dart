@@ -29,6 +29,7 @@ class Settings with ChangeNotifier {
   int _minHue = 0;
   int _maxHue = 255;
   int _ledBrightness = 20;
+  bool _addBlack = false;
 
   final int _rows = 6;
   final int _cols = 18;
@@ -47,7 +48,7 @@ class Settings with ChangeNotifier {
     },
     {
       "description": "Lineas de colores",
-      "icon": Icons.arrow_forward,
+      "icon": Icons.line_style,
       "value": 2,
     },
     {
@@ -62,12 +63,12 @@ class Settings with ChangeNotifier {
     },
     {
       "description": "Puntos al azar",
-      "icon": Icons.shuffle,
+      "icon": Icons.blur_circular,
       "value": 5,
     },
     {
-      "description": "Efecto Matrix",
-      "icon": Icons.grid_on,
+      "description": "Lluvia",
+      "icon": Icons.cloud_queue,
       "value": 6,
     },
     {
@@ -84,6 +85,11 @@ class Settings with ChangeNotifier {
       "description": "Mar",
       "icon": Icons.waves,
       "value": 9,
+    },
+    {
+      "description": "Paleta movil",
+      "icon": Icons.switch_left,
+      "value": 10,
     }
   ];
 
@@ -101,12 +107,19 @@ class Settings with ChangeNotifier {
   int get ledBrightness => _ledBrightness;
   int get rows => _rows;
   int get cols => _cols;
+  bool get addBlack => _addBlack;
 
   void setLedBrightness(int brightness) {
     _ledBrightness = brightness;
     notifyListeners();
     String message = "<L${get3DigitFromInt(brightness)}>";
-    print(message);
+    bluetooth.sendMessageToBluetooth(message);
+  }
+
+  void setAddBlack(bool addBlack) {
+    _addBlack = addBlack;
+    notifyListeners();
+    String message = "<b${addBlack ? "1" : "0"}>";
     bluetooth.sendMessageToBluetooth(message);
   }
 

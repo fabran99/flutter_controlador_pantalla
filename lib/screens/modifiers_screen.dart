@@ -31,13 +31,9 @@ class _ModifiersScreenState extends State<ModifiersScreen> {
     // connect to settings provider
     final settings = Provider.of<Settings>(context);
     final bluetooth = Provider.of<Bluetooth>(context);
-    print("Rerun modifiers");
 
     // if is not connected, go to home
     if (!bluetooth.isConnected) {
-      // Future.delayed(Duration.zero, () {
-      //   Navigator.of(context).pushReplacementNamed('/');
-      // });
       return Container();
     }
 
@@ -46,19 +42,26 @@ class _ModifiersScreenState extends State<ModifiersScreen> {
         "text": "Modo degradado",
         "value": settings.gradientMode,
         "func": settings.setGradientMode,
-        "subtitle": "Alternar entre modo degradado o color plano"
+        "subtitle":
+            "Alternar entre modo degradado o color plano, aplica tambien a modo 'Paleta movil'"
       },
       {
         "text": "Oscurecer pixeles aleatoriamente",
         "value": settings.randomizeDark,
         "func": settings.setRandomizeDark,
-        "subtitle": "Aplica en los modos degradado y reloj"
+        "subtitle": "Aplica en los modos degradado, reloj y arcoiris."
       },
       {
         "text": "Degradado horizontal",
         "value": settings.horizontal,
         "func": settings.setHorizontal,
         "subtitle": "Direccion del degradado"
+      },
+      {
+        "text": "Ultima linea en negro",
+        "value": settings.addBlack,
+        "func": settings.setAddBlack,
+        "subtitle": "Hace que la ultima franja del degradado sea negra"
       },
     ];
 
@@ -84,7 +87,7 @@ class _ModifiersScreenState extends State<ModifiersScreen> {
                 ListTile(
                   title: const Text("Color 1"),
                   subtitle: const Text(
-                    "Afecta a reloj/degradado",
+                    "Afecta a reloj, degradado y paleta movil",
                     style: TextStyle(fontSize: 12),
                   ),
                   trailing: ColorIndicator(
@@ -104,7 +107,7 @@ class _ModifiersScreenState extends State<ModifiersScreen> {
                 ListTile(
                   title: const Text("Color 2"),
                   subtitle: const Text(
-                    "Afecta a reloj/degradado",
+                    "Afecta a reloj, degradado y paleta movil",
                     style: TextStyle(fontSize: 12),
                   ),
                   trailing: ColorIndicator(

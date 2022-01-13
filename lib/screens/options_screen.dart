@@ -8,6 +8,8 @@ import "../providers/bluetooth.dart";
 class OptionsScreen extends StatelessWidget {
   static const routeName = "/home";
 
+  const OptionsScreen({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final bluetooth = Provider.of<Bluetooth>(context);

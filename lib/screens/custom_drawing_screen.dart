@@ -8,6 +8,8 @@ import 'package:flutter/services.dart';
 class CustomDrawingScreen extends StatefulWidget {
   static const routeName = '/custom-drawing';
 
+  const CustomDrawingScreen({Key? key}) : super(key: key);
+
   @override
   _CustomDrawingScreenState createState() => _CustomDrawingScreenState();
 }
